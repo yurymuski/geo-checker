@@ -14,6 +14,7 @@ Set GEOIP credentials at [conf/geoip.conf](conf/geoip.conf)
 ---
 ### Test:
 ```shell
+docker build -t geo-checker .
 docker run --rm -d  -v /tmp/geoip/:/usr/share/geoip/ --name geo-checker -p 8080:80 geo-checker:latest
 
 # test with some IP/HOST
