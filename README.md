@@ -22,7 +22,7 @@ Set GEOIP credentials at [conf/geoip.conf](conf/geoip.conf)
 ---
 ### Test:
 ```shell
-docker run --rm -d  -v /tmp/geoip/:/usr/share/geoip/ --name geo-checker -p 8080:80 ymuski/geo-checker:latest
+docker run --rm -d  -v /tmp/geoip/:/usr/share/geoip/ -v ${PWD}/conf/geoip.conf:/etc/geoip.conf --name geo-checker -p 8080:80 ymuski/geo-checker:latest
 
 # test with some IP/HOST
 curl localhost:8080 -H "X-Real-Ip: 1.1.1.1" -H "Host: test"
