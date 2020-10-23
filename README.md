@@ -20,7 +20,7 @@ Set variables:
 ---
 ### Test:
 ```shell
-docker run --rm -d  -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID="AccountID" -e GEOIP_LICENSEKEY="LicenseKey" -e GEOIP_EDITIONID="GeoLite2-Country" --name geo-checker -p 8080:80 ymuski/geo-checker:latest
+docker run -d -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID="AccountID" -e GEOIP_LICENSEKEY="LicenseKey" -e GEOIP_EDITIONID="GeoLite2-Country" --name geo-checker -p 8080:80 ymuski/geo-checker:latest
 
 # test with some IP/HOST
 curl localhost:8080 -H "X-Real-Ip: 1.1.1.1" -H "Host: test"
