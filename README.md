@@ -25,3 +25,13 @@ docker run -d -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID="AccountID" -e
 # test with some IP/HOST
 curl localhost:8080 -H "X-Real-Ip: 1.1.1.1" -H "Host: test"
 ```
+
+---
+### Notes:
+if you use nginx as reverse-proxy over geo-checker add:
+```
+location / {
+    proxy_set_header X-Real-IP  $remote_addr;
+    proxy_pass http://127.0.0.1:8080;
+}
+```
