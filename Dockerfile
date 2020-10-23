@@ -2,6 +2,12 @@ FROM aandrewww/alpine-openresty-extended
 
 WORKDIR /usr/local/openresty
 
+# install supervisor
+RUN apk update && apk add --no-cache supervisor
+
+# install lua modules
+RUN luarocks install lua-resty-http
+
 # create app directory in container
 RUN mkdir /usr/local/openresty/logs
 
@@ -15,12 +21,6 @@ COPY ./conf/supervisord.conf /etc/
 
 # Remove default nginx conf
 RUN rm -f /etc/nginx/conf.d/default.conf
-
-# install supervisor
-RUN apk update && apk add --no-cache supervisor
-
-# install lua modules
-RUN luarocks install lua-resty-http
 
 # set up crontab
 RUN /usr/bin/crontab /crontab.txt
