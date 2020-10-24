@@ -12,11 +12,10 @@ RUN luarocks install lua-resty-http
 RUN mkdir /usr/local/openresty/logs
 
 # copy files from current dir to folder in container
-COPY ./conf/nginx.conf /etc/nginx/conf.d
+COPY ./conf/nginx.conf /etc/nginx/conf.d/
+COPY ./favicon.ico /usr/local/openresty/nginx/html/
 COPY ./conf/geoip.conf /etc/geoip.conf
-
 COPY ./conf/crontab.txt /crontab.txt
-# COPY ./conf/docker-entry.sh /docker-entry.sh
 COPY ./conf/supervisord.conf /etc/
 
 # Remove default nginx conf
