@@ -35,16 +35,22 @@ docker run -d -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID="AccountID" -e
 
 # test with any public IP
 curl localhost:8080 -H "X-Real-Ip: 1.1.1.1"
+curl localhost:8080 -H "X-Custom-Real-Ip: 1.1.1.1"
 
 {"iso2Code":"AU","name":"Australia"}
 ```
 
 ---
 ### Notes:
-if you use nginx as reverse-proxy over geo-checker add:
-```
+- if you use nginx as reverse-proxy over geo-checker add:
+```shell
 location / {
     proxy_set_header X-Real-IP  $remote_addr;
     proxy_pass http://127.0.0.1:8080;
 }
 ```
+
+- Header priority:
+1. X-Custom-Real-Ip (Highest)
+2. X-Real-Ip
+3. CF-Connecting-IP
