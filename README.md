@@ -21,7 +21,8 @@ docker run -d -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNT
 docker run --rm -it -v ${PWD}/tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNTID -e GEOIP_LICENSEKEY=$GEOIP_LICENSEKEY -e GEOIP_EDITIONID=$GEOIP_EDITIONID --name geo-checker -p 8080:80 ymuski/geo-checker
 
 # test with any public IP
-# Header priority: 1. X-Custom-Real-Ip (Highest) 2. X-Real-Ip 3. CF-Connecting-IP
+# Header priority: 1. X-Header-Real-Ip (Highest) 1. X-Custom-Real-Ip 2. X-Real-Ip 3. CF-Connecting-IP
+curl localhost:8080 -H "X-Header-Real-Ip: 1.1.1.1"
 curl localhost:8080 -H "X-Custom-Real-Ip: 1.1.1.1"
 curl localhost:8080 -H "X-Real-Ip: 1.1.1.1"
 curl localhost:8080 -H "CF-Connecting-IP: 1.1.1.1"
