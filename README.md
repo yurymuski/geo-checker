@@ -37,12 +37,13 @@ curl localhost:8080/ip/8.8.8.8
 ### Responce:
 ```
 # Body
-{"IP":"1.1.1.1","iso2Code":"AU","name":"Australia"}
+{"IP":"8.8.8.8","iso2Code":"US","name":"United States"}
 
 # Responce headers
-X-Real-IP: 1.1.1.1
-X-Geo-Country-Code: AU
-X-Geo-Country-Name: Australia
+< X-Real-IP: 8.8.8.8
+< X-Geo-Country-Code: US
+< X-Geo-Country-Name: United States
+
 ```
 
 ---
