@@ -1,1 +1,1 @@
-48 14 * * 3,6 /usr/local/bin/geoipupdate -v -f /etc/geoip.conf -d /usr/share/geoip >> /var/log/cron/geoipupdate_stdout.log 2>&1 && supervisorctl restart nginx
+GEOIP_CRONTAB /usr/local/bin/geoipupdate -v -f /etc/geoip.conf -d /usr/share/geoip >> /var/log/cron/geoipupdate_stdout.log 2>&1 && tail -n1 /var/log/cron/geoipupdate_stdout.log > /proc/self/fd/1 && supervisorctl restart nginx

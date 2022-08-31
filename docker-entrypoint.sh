@@ -7,6 +7,11 @@ sed -i s/GEOIP_LICENSEKEY/$GEOIP_LICENSEKEY/g /etc/geoip.conf;
 sed -i s/GEOIP_EDITIONID/$GEOIP_EDITIONID/g /etc/geoip.conf;
 sed -i s/GEOIP_EDITIONID/$GEOIP_EDITIONID/g /etc/nginx/conf.d/nginx.conf;
 
+# Update geoipupdate cron
+GEOIP_CRONTAB="${GEOIP_CRONTAB:-48 14 * * 3,6}"
+sed -i s/GEOIP_CRONTAB/"$GEOIP_CRONTAB"/g /etc/crontab.txt;
+/usr/bin/crontab /etc/crontab.txt
+
 case $1 in
 
   start)

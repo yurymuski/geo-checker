@@ -14,19 +14,25 @@ export GEOIP_ACCOUNTID="AccountID"
 export GEOIP_LICENSEKEY="LicenseKey"
 export GEOIP_EDITIONID="GeoLite2-Country" # "GeoLite2-Country" or "GeoIP2-Country"
 
+# OPTIONAL: set custom GEOIP_CRONTAB, default is '48 14 * * 3,6'
+export GEOIP_CRONTAB="48 14 * * 3"
+
 # start docker container
 docker run -d -v /tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNTID -e GEOIP_LICENSEKEY=$GEOIP_LICENSEKEY -e GEOIP_EDITIONID=$GEOIP_EDITIONID --name geo-checker -p 8080:80 ymuski/geo-checker:latest
 
 # interactive mode
 docker run --rm -it -v ${PWD}/tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNTID -e GEOIP_LICENSEKEY=$GEOIP_LICENSEKEY -e GEOIP_EDITIONID=$GEOIP_EDITIONID --name geo-checker -p 8080:80 ymuski/geo-checker
 
+# interactive mode with custom crontab
+docker run --rm -it -v ${PWD}/tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNTID -e GEOIP_LICENSEKEY=$GEOIP_LICENSEKEY -e GEOIP_EDITIONID=$GEOIP_EDITIONID -e GEOIP_CRONTAB="$GEOIP_CRONTAB" --name geo-checker -p 8080:80 ymuski/geo-checker
+
 # test with any public IP
 # Header priority: 1. X-Header-Real-Ip (Highest) 1. X-Custom-Real-Ip 2. X-Real-Ip 3. CF-Connecting-IP
-curl localhost:8080 -H "X-Header-Real-Ip: 1.1.1.1"
-curl localhost:8080 -H "X-Custom-Real-Ip: 1.1.1.1"
-curl localhost:8080 -H "X-Real-Ip: 1.1.1.1"
-curl localhost:8080 -H "CF-Connecting-IP: 1.1.1.1"
-curl localhost:8080/ip/1.1.1.1
+curl localhost:8080 -H "X-Header-Real-Ip: 8.8.8.8"
+curl localhost:8080 -H "X-Custom-Real-Ip: 8.8.8.8"
+curl localhost:8080 -H "X-Real-Ip: 8.8.8.8"
+curl localhost:8080 -H "CF-Connecting-IP: 8.8.8.8"
+curl localhost:8080/ip/8.8.8.8
 
 ```
 

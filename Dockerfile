@@ -9,14 +9,14 @@ RUN apk update && apk add --no-cache supervisor
 COPY ./conf/nginx.conf /etc/nginx/conf.d/
 COPY ./favicon.ico /usr/local/openresty/nginx/html/
 COPY ./conf/geoip.conf /etc/geoip.conf
-COPY ./conf/crontab.txt /crontab.txt
+COPY ./conf/crontab.txt /etc/crontab.txt
 COPY ./conf/supervisord.conf /etc/
 
 # Remove default nginx conf
 RUN rm -f /etc/nginx/conf.d/default.conf
 
 # set up crontab
-RUN /usr/bin/crontab /crontab.txt
+RUN /usr/bin/crontab /etc/crontab.txt
 RUN mkdir -p /var/log/cron
 
 EXPOSE 80
