@@ -1,4 +1,5 @@
-Geo-checker is the IP address resolver to the country_name and iso_code. Based on openresty (nginx) and maxmind geo DB.
+Geo-checker is the IP address resolver to the country_name and iso_code.
+Based on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
 
 
 ### Usage:
