@@ -71,3 +71,17 @@ location / {
     proxy_pass http://127.0.0.1:8080;
 }
 ```
+
+---
+## helm chart
+
+### Usage:
+Go to helm [Readme](helm/README.md#Usage)
+
+### Publish new version of helm-chart:
+```sh
+cd helm/packages
+helm package ../
+cd ../
+helm repo index . --url https://yurymuski.github.io/geo-checker/helm/
+```
