@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  geo-checker:
+  - apiVersion: v2
+    appVersion: v1-1-0
+    created: "2022-09-05T00:11:06.311371895+04:00"
+    description: Geo-checker is the IP address resolver to the country_name and iso_code. Based on openresty (nginx) and maxmind geo DB.
+    digest: 0f61087119b49fda988c0c9c89f7ca3db4ee1e249ec83985b96ca465afe097c3
+    name: geo-checker
+    type: application
+    urls:
+    - geo-checker-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-09-05T00:11:06.310684045+04:00"

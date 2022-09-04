@@ -1,6 +1,6 @@
 apiVersion: v2
 name: geo-checker
-description: A Helm chart for Kubernetes
+description: Geo-checker is the IP address resolver to the country_name and iso_code. Based on openresty (nginx) and maxmind geo DB.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
