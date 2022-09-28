@@ -2,7 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
+
+minAvailable: 1
 
 image:
   repository: ymuski/geo-checker
@@ -103,11 +105,9 @@ tolerations: []
 affinity: {}
 
 maxmind:
-  # NOTE: Mandatory vars. Set your creds from maxmind.com
-  geoipAccountid:
-  geoipLicensekey:
-  # "GeoLite2-Country" or "GeoIP2-Country"
-  geoipEditionid: "GeoLite2-Country"
+  geoipAccountid: "AccountID"             # NOTE: Mandatory vars. Set your creds from maxmind.com
+  geoipLicensekey: "LicenseKey"           # NOTE: Mandatory vars. Set your creds from maxmind.com
+  geoipEditionid: "GeoLite2-Country"      # NOTE: "GeoLite2-Country" or "GeoIP2-Country"
 
 env:
   GEOIP_CRONTAB: '48 14 * * 3,6'

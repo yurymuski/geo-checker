@@ -1,0 +1,18 @@
+{{- if or (gt (.Values.replicaCount | int) 1) (gt (.Values.autoscaling.minReplicas | int) 1) }}
+apiVersion: {{ ternary "policy/v1" "policy/v1beta1" (semverCompare ">=1.21.0-0" .Capabilities.KubeVersion.Version) }}
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    {{- include "geo-checker.labels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
+    {{- with .Values.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  name: {{ include "geo-checker.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "geo-checker.selectorLabels" . | nindent 6 }}
+  minAvailable: {{ .Values.minAvailable }}
+{{- end }}
