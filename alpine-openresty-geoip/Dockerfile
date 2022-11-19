@@ -23,9 +23,8 @@ RUN apk add wget tar
 COPY --from=geoipupdate-source /go/bin/geoipupdate /usr/local/bin/
 
 #################
-# ngx_http_geoip2_module
-# https://github.com/leev/ngx_http_geoip2_module
-
+# libmaxminddb
+# https://github.com/maxmind/libmaxminddb
 #################
 
 ARG LIBMAXMINDDB_VERSION="1.7.1"
@@ -216,3 +215,9 @@ CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
 # Use SIGQUIT instead of default SIGTERM to cleanly drain requests
 # See https://github.com/openresty/docker-openresty/blob/master/README.md#tips--pitfalls
 STOPSIGNAL SIGQUIT
+
+
+#######
+# add ngx_http_geoip2_module to nginx config
+#######
+RUN sed -i '1s|^|load_module /usr/local/openresty/nginx/modules/ngx_http_geoip2_module.so; # GeoIP2\n|' /usr/local/openresty/nginx/conf/nginx.conf

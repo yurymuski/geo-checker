@@ -1,7 +1,7 @@
 FROM ymuski/alpine-openresty-geoip
 
 # install supervisor
-RUN apk update && apk add --no-cache supervisor
+RUN apk update && apk add --no-cache supervisor bash
 
 # copy files from current dir to folder in container
 COPY ./conf/nginx.conf /etc/nginx/conf.d/
