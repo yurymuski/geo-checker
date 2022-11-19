@@ -2,8 +2,25 @@ apiVersion: v1
 entries:
   geo-checker:
   - apiVersion: v2
+    appVersion: 2.0.0
+    created: "2022-11-20T02:48:48.974525938+04:00"
+    description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
+      on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
+    digest: f88c3f23843f2881c7feade4f350687d0ad19dff1677ee87afba11c72488a7ff
+    home: https://github.com/yurymuski/geo-checker
+    maintainers:
+    - email: muski.yury@gmail.com
+      name: yurymuski
+    name: geo-checker
+    sources:
+    - https://github.com/yurymuski/geo-checker/tree/main/helm
+    type: application
+    urls:
+    - https://yurymuski.github.io/geo-checker/helm/packages/geo-checker-2.0.0.tgz
+    version: 2.0.0
+  - apiVersion: v2
     appVersion: v1-1-0
-    created: "2022-09-28T21:46:23.808833178+04:00"
+    created: "2022-11-20T02:48:48.973855309+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 9517f7d39bc69984d2e9ba2c263cd9ab2700f90110adab11225db23e5c71dfc2
@@ -20,7 +37,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: v1-1-0
-    created: "2022-09-28T21:46:23.805844929+04:00"
+    created: "2022-11-20T02:48:48.973162622+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.
       Based on openresty (nginx) and maxmind geo DB.
     digest: cd31db4acf49a69cc9778f2dcff5b7a3a4fec3686974df15d036c6e74e1b2513
@@ -29,4 +46,4 @@ entries:
     urls:
     - https://yurymuski.github.io/geo-checker/helm/packages/geo-checker-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-28T21:46:23.795189505+04:00"
+generated: "2022-11-20T02:48:48.972404207+04:00"
