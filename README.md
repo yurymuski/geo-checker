@@ -37,12 +37,12 @@ curl localhost:8080/ip/8.8.8.8
 
 ```
 
-### Responce:
+### Response:
 ```
 # Body
 {"IP":"8.8.8.8","iso2Code":"US","name":"United States"}
 
-# Responce headers
+# Response headers
 < X-Real-IP: 8.8.8.8
 < X-Geo-Country-Code: US
 < X-Geo-Country-Name: United States
