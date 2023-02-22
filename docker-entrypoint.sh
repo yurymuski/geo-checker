@@ -12,6 +12,8 @@ GEOIP_CRONTAB="${GEOIP_CRONTAB:-48 14 * * 3,6}"
 sed -i s/GEOIP_CRONTAB/"$GEOIP_CRONTAB"/g /opt/crontab.txt;
 /usr/bin/crontab /opt/crontab.txt
 
+mkdir -p /usr/share/geoip
+
 case $1 in
 
   start)
