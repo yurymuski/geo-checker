@@ -2,8 +2,8 @@ apiVersion: v2
 name: geo-checker
 description: Geo-checker is the IP address resolver to the country_name and iso_code.Based on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
 type: application
-version: 2.0.1
-appVersion: "2.0.1"
+version: 2.1.0
+appVersion: "2.1.0"
 home: https://github.com/yurymuski/geo-checker
 sources:
   - https://github.com/yurymuski/geo-checker/tree/main/helm
