@@ -57,7 +57,11 @@ spec:
             - name: GEOIP_LICENSEKEY
               valueFrom:
                 secretKeyRef:
+                  {{- if .Values.existingSecret }}
+                  name: {{ .Values.existingSecret }}
+                  {{- else }}
                   name: {{ include "geo-checker.fullname" . }}
+                  {{- end }}
                   key: geoipLicensekey
           {{- if .Values.env }}
           {{- range $key, $value := .Values.env }}
