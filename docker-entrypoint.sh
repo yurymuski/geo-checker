@@ -8,7 +8,7 @@ sed -i s/GEOIP_EDITIONID/$GEOIP_EDITIONID/g /opt/geoip.conf;
 sed -i s/GEOIP_EDITIONID/$GEOIP_EDITIONID/g /etc/nginx/conf.d/nginx.conf;
 
 # Update geoipupdate cron
-GEOIP_CRONTAB="${GEOIP_CRONTAB:-48 14 * * 3,6}"
+GEOIP_CRONTAB="${GEOIP_CRONTAB:-48 14 * * 3,6}" # NOTE: maxmind databases are updated twice weekly, every Tuesday and Friday.
 sed -i s/GEOIP_CRONTAB/"$GEOIP_CRONTAB"/g /opt/crontab.txt;
 /usr/bin/crontab /opt/crontab.txt
 

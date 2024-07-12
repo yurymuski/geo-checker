@@ -13,9 +13,10 @@ Based on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
 # Retrive GEOIP credentials from `maxmind.com` and set variables
 export GEOIP_ACCOUNTID="AccountID"
 export GEOIP_LICENSEKEY="LicenseKey"
-export GEOIP_EDITIONID="GeoLite2-Country" # "GeoLite2-Country" or "GeoIP2-Country"
+export GEOIP_EDITIONID="GeoLite2-Country" # "GeoLite2-Country", "GeoIP2-Country" or "GeoIP2-City"
 
 # OPTIONAL: set custom GEOIP_CRONTAB, default is '48 14 * * 3,6'
+# NOTE: maxmind databases are updated twice weekly, every Tuesday and Friday.
 export GEOIP_CRONTAB="48 14 * * 3"
 
 # start docker container
@@ -34,6 +35,9 @@ curl localhost:8080 -H "X-Custom-Real-Ip: 8.8.8.8"
 curl localhost:8080 -H "X-Real-Ip: 8.8.8.8"
 curl localhost:8080 -H "CF-Connecting-IP: 8.8.8.8"
 curl localhost:8080/ip/8.8.8.8
+curl localhost:8080/ip/city/8.8.8.8
+curl localhost:8080/ip/2a03:2880:f189:80:face:b00c:0:25de
+curl localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de
 
 ```
 
@@ -85,3 +89,11 @@ helm package ../
 cd ../
 helm repo index . --url https://yurymuski.github.io/geo-checker/helm/
 ```
+
+---
+## refs:
+[leev/ngx_http_geoip2_module](https://github.com/leev/ngx_http_geoip2_module)
+[man mmdblookup](https://maxmind.github.io/libmaxminddb/mmdblookup.html)
+[mmdbinspect examples](https://github.com/maxmind/mmdbinspect?tab=readme-ov-file#examples)
+[maxmind DB accuracy](https://www.maxmind.com/en/geoip2-city-accuracy-comparison)
+[maxmind geoip demo](https://www.maxmind.com/en/geoip-web-services-demo)

@@ -107,9 +107,9 @@ affinity: {}
 maxmind:
   geoipAccountid: "AccountID"             # NOTE: Mandatory vars. Set your creds from maxmind.com
   geoipLicensekey: "LicenseKey"           # NOTE: Mandatory vars. Set your creds from maxmind.com
-  geoipEditionid: "GeoLite2-Country"      # NOTE: "GeoLite2-Country" or "GeoIP2-Country"
+  geoipEditionid: "GeoLite2-Country"      # NOTE: "GeoLite2-Country", "GeoIP2-Country" or "GeoIP2-City"
 
 existingSecret: ""
 
 env:
-  GEOIP_CRONTAB: '48 14 * * 3,6'
+  GEOIP_CRONTAB: '48 14 * * 3,6' # NOTE: maxmind databases are updated twice weekly, every Tuesday and Friday.
