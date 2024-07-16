@@ -57,6 +57,7 @@ curl localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de
 ## docker image:
 ```shell
 docker build -t ymuski/geo-checker .
+docker push ymuski/geo-checker
 docker pull ymuski/geo-checker
 ```
 
