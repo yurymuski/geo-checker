@@ -87,10 +87,12 @@ Go to helm [Readme](helm/README.md#Usage)
 
 ### Publish new version of helm-chart:
 ```sh
+# update helm/Chart.yaml
 cd helm/packages
 helm package ../
 cd ../
 helm repo index . --url https://yurymuski.github.io/geo-checker/helm/
+cd ../
 ```
 
 ---
