@@ -1,4 +1,4 @@
-FROM golang:1.19.3-alpine3.16 as geoipupdate-source
+FROM golang:1.25.1-alpine3.22 as geoipupdate-source
 ARG GEOIPUPDATE_VERSION="4.10.0"
 
 RUN apk add wget unzip
@@ -10,7 +10,7 @@ RUN cd geoipupdate-$GEOIPUPDATE_VERSION && \
     go install -ldflags "-X main.version=$GEOIPUPDATE_VERSION" ./...
 
 
-FROM alpine:3.16
+FROM alpine:3.22
 
 WORKDIR /opt/
 RUN apk add wget tar
