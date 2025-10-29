@@ -22,6 +22,7 @@ RUN apk add wget tar
 
 COPY --from=geoipupdate-source /go/bin/geoipupdate /usr/local/bin/
 
+
 #################
 # libmaxminddb
 # https://github.com/maxmind/libmaxminddb
@@ -38,6 +39,7 @@ RUN apk add make  gcc make g++ zlib-dev --no-cache --virtual .build-deps && \
     ldconfig /usr/local/lib && \
     rm ../libmaxminddb-$LIBMAXMINDDB_VERSION.tar.gz && \
     apk del .build-deps
+
 
 #################
 # ngx_http_geoip2_module
