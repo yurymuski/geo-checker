@@ -1,4 +1,4 @@
-FROM ymuski/alpine-openresty-geoip
+FROM ymuski/alpine-openresty-geoip:2.0.0
 
 # install supervisor
 RUN apk update && apk add --no-cache supervisor bash
