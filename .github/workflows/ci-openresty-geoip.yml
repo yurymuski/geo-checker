@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - ci # TODO: remove
     paths:
       - 'alpine-openresty-geoip/**'
 
