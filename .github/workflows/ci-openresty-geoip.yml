@@ -43,6 +43,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          file: alpine-openresty-geoip/Dockerfile
           push: true
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/alpine-openresty-geoip:${{ env.DOCKER_IMAGE_TAG }}

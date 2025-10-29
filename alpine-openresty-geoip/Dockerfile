@@ -10,6 +10,7 @@ RUN cd geoipupdate-$GEOIPUPDATE_VERSION && \
     go install -ldflags "-X main.version=$GEOIPUPDATE_VERSION" ./...
 
 
+##################################
 FROM alpine:3.22
 
 WORKDIR /opt/
