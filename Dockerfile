@@ -5,7 +5,8 @@ RUN apk update && apk add --no-cache supervisor bash
 
 # copy files from current dir to folder in container
 COPY ./conf/nginx.conf /etc/nginx/conf.d/
-COPY ./favicon.ico /usr/local/openresty/nginx/html/
+COPY ./favicon.png /usr/local/openresty/nginx/html/
+COPY ./index.html /usr/local/openresty/nginx/html/
 COPY ./conf/geoip.conf /opt/geoip.conf
 COPY ./conf/crontab.txt /opt/crontab.txt
 COPY ./conf/supervisord.conf /opt/

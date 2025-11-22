@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo-Checker | High-Performance IP Geolocation API for Docker & Kubernetes</title>
+    <meta name="description"
+        content="Open-source IP address to country resolver using OpenResty and MaxMind. Fast, Dockerized, Helm/Kubernetes ready, and free.">
+    <meta name="keywords" content="geoip, ip geolocation, docker, kubernetes, helm, openresty, nginx, maxmind, api">
+    <meta name="author" content="Yury Muski">
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yurymuski.github.io/geo-checker/">
+    <meta property="og:title" content="Geo-Checker | High-Performance IP Geolocation API">
+    <meta property="og:description"
+        content="Instantly resolve IP addresses to locations. Built on OpenResty & MaxMind. Docker & Kubernetes ready.">
+    <meta property="og:image" content="https://yurymuski.github.io/geo-checker/assets/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yurymuski.github.io/geo-checker/">
+    <meta property="twitter:title" content="Geo-Checker | High-Performance IP Geolocation API">
+    <meta property="twitter:description"
+        content="Instantly resolve IP addresses to locations. Built on OpenResty & MaxMind. Docker & Kubernetes ready.">
+    <meta property="twitter:image" content="https://yurymuski.github.io/geo-checker/assets/og-image.png">
+
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --primary-color: #38bdf8;
+            --secondary-color: #818cf8;
+            --accent-color: #22d3ee;
+            --code-bg: #1e293b;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .github-star {
+            display: flex;
+            align-items: center;
+            background: #24292e;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid #444c56;
+        }
+
+        .github-star:hover {
+            background: #2f363d;
+            color: white;
+        }
+
+        .github-star svg {
+            margin-right: 5px;
+            fill: currentColor;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+            color: var(--bg-color);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Terminal Demo */
+        .demo-section {
+            padding: 60px 0;
+        }
+
+        .terminal-window {
+            background: var(--code-bg);
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-mono);
+            margin: 0 auto;
+            max-width: 900px;
+        }
+
+        .terminal-header {
+            background: #0f172a;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .red {
+            background: #ef4444;
+        }
+
+        .yellow {
+            background: #f59e0b;
+        }
+
+        .green {
+            background: #10b981;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            color: #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        .command {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .command::before {
+            content: "$ ";
+            color: #64748b;
+        }
+
+        .output {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+            display: block;
+        }
+
+        /* Installation Tabs */
+        .installation {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .installation h2 {
+            margin-bottom: 40px;
+            font-size: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            font-family: var(--font-mono);
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: #64748b;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            margin: 0 10px;
+            color: #94a3b8;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+                /* Simple hide for mobile for now */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">geo-checker</div>
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#demo">Demo</a>
+                    <a href="#install">Install</a>
+                    <a href="https://github.com/yurymuski/geo-checker" target="_blank" class="github-star">
+                        <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
+                            <path fill-rule="evenodd"
+                                d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z">
+                            </path>
+                        </svg>
+                        Star on GitHub
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Instantly Resolve IP Addresses<br>to Locations</h1>
+                <p>High-performance, open-source IP geolocation API. Built on OpenResty and MaxMind. Ready for Docker
+                    and Kubernetes.</p>
+                <div class="cta-buttons">
+                    <a href="#install" class="btn btn-primary">Get Started</a>
+                    <a href="https://github.com/yurymuski/geo-checker" target="_blank" class="btn btn-secondary">View on
+                        GitHub</a>
+                    <a href="https://artifacthub.io/packages/helm/geo-checker/geo-checker" target="_blank"
+                        class="btn btn-secondary">Artifact Hub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Blazing Fast</h3>
+                        <p>Built on OpenResty (Nginx) for high-performance, non-blocking I/O. Handles thousands of
+                            requests per second with ease.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Accurate Data</h3>
+                        <p>Uses MaxMind GeoIP2 databases for reliable IP-to-location resolution. Includes built-in cron
+                            for automatic database updates.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🐳</div>
+                        <h3>Docker Ready</h3>
+                        <p>Lightweight Docker image based on Alpine Linux. Easy to deploy and integrate into your
+                            existing microservices architecture.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">☸️</div>
+                        <h3>Kubernetes Native</h3>
+                        <p>Full Helm chart support for easy deployment to Kubernetes clusters. Scalable and cloud-native
+                            ready.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="demo-section">
+            <div class="container">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-body">
+                        <span class="command">curl localhost:8080/ip/8.8.8.8</span>
+                        <span class="output">{"IP":"8.8.8.8","iso2Code":"US","name":"United States"}</span>
+
+                        <span class="command"># City Detection</span>
+                        <span class="command">curl localhost:8080/ip/city/8.8.8.8</span>
+                        <span class="output">{"ip":"8.8.8.8","country_iso_code":"US","country_name":"United
+                            States","city_name":"Mountain View","continent_name":"North
+                            America","subdivision_iso_code":"CA","subdivision_name":"California"}</span>
+
+                        <span class="command"># Custom Headers</span>
+                        <span class="command">curl localhost:8080 -H "X-Header-Real-Ip: 1.1.1.1"</span>
+                        <span class="output">{"IP":"1.1.1.1","iso2Code":"AU","name":"Australia"}</span>
+
+                        <span class="command">curl localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de</span>
+                        <span class="output">{
+                            "ip": "2a03:2880:f189:80:face:b00c:0:25de",
+                            "country_iso_code": "GB",
+                            "country_name": "United Kingdom",
+                            "city_name": "London",
+                            "continent_name": "Europe"
+                            }</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="install" class="installation">
+            <div class="container">
+                <h2>Installation</h2>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="openTab('docker')">Docker</button>
+                    <button class="tab-btn" onclick="openTab('helm')">Helm / K8s</button>
+                </div>
+
+                <div id="docker" class="tab-content active">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('docker-code')">Copy</button>
+                        <pre id="docker-code">
+# Run with Docker
+docker run -d \
+  -v /tmp/geoip/:/usr/share/geoip/ \
+  -e GEOIP_ACCOUNTID="YourAccountID" \
+  -e GEOIP_LICENSEKEY="YourLicenseKey" \
+  -e GEOIP_EDITIONID="GeoLite2-Country" \
+  -p 8080:80 \
+  ymuski/geo-checker:latest</pre>
+                    </div>
+                </div>
+
+                <div id="helm" class="tab-content">
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('helm-code')">Copy</button>
+                        <pre id="helm-code">
+# Add Helm Repo
+helm repo add geo-checker https://yurymuski.github.io/geo-checker/helm/
+helm repo update
+
+# Install Chart
+helm upgrade --install my-geo-checker geo-checker/geo-checker \
+  --set maxmind.geoipAccountid="YourAccountID" \
+  --set maxmind.geoipLicensekey="YourLicenseKey"</pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/yurymuski/geo-checker" target="_blank">GitHub</a>
+                <a href="https://hub.docker.com/r/ymuski/geo-checker" target="_blank">Docker Hub</a>
+                <a href="https://artifacthub.io/packages/helm/geo-checker/geo-checker" target="_blank">Artifact Hub</a>
+            </div>
+            <p>&copy; 2023 Yury Muski. Open Source under MIT License.</p>
+        </div>
+    </footer>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Deactivate all tab buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show specific tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Activate specific tab button
+            const activeBtn = Array.from(buttons).find(btn => btn.getAttribute('onclick').includes(tabName));
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+
+        function copyCode(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector(`button[onclick="copyCode('${elementId}')"]`);
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Simple intersection observer for fade-in animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .terminal-window').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
