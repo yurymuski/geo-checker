@@ -29,15 +29,19 @@ docker run --rm -it -v ${PWD}/tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$G
 docker run --rm -it -v ${PWD}/tmp/geoip/:/usr/share/geoip/ -e GEOIP_ACCOUNTID=$GEOIP_ACCOUNTID -e GEOIP_LICENSEKEY=$GEOIP_LICENSEKEY -e GEOIP_EDITIONID=$GEOIP_EDITIONID -e GEOIP_CRONTAB="$GEOIP_CRONTAB" --name geo-checker -p 8080:80 ymuski/geo-checker
 
 # test with any public IP
-# Header priority: 1. X-Header-Real-Ip (Highest) 1. X-Custom-Real-Ip 2. X-Real-Ip 3. CF-Connecting-IP
-curl localhost:8080 -H "X-Header-Real-Ip: 8.8.8.8"
-curl localhost:8080 -H "X-Custom-Real-Ip: 8.8.8.8"
-curl localhost:8080 -H "X-Real-Ip: 8.8.8.8"
-curl localhost:8080 -H "CF-Connecting-IP: 8.8.8.8"
+
 curl localhost:8080/ip/8.8.8.8
 curl localhost:8080/ip/city/8.8.8.8
 curl localhost:8080/ip/2a03:2880:f189:80:face:b00c:0:25de
 curl localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de
+
+# Possible to pass any IP address as a header to get the country name and iso_code
+# Header priority: 1. X-Header-Real-Ip (Highest) 2. X-Custom-Real-Ip 3. X-Real-Ip 4. CF-Connecting-IP
+curl localhost:8080/myip -H "X-Header-Real-Ip: 8.8.8.8"
+curl localhost:8080/myip -H "X-Custom-Real-Ip: 8.8.8.8"
+curl localhost:8080/myip -H "X-Real-Ip: 8.8.8.8"
+curl localhost:8080/myip -H "CF-Connecting-IP: 8.8.8.8"
+
 
 ```
 

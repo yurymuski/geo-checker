@@ -232,40 +232,61 @@
         }
 
         .terminal-window {
-            background: var(--code-bg);
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            background: #2e3436;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
             overflow: hidden;
-            border: 1px solid var(--border-color);
+            border: 1px solid #1c1f20;
             font-family: var(--font-mono);
             margin: 0 auto;
             max-width: 900px;
         }
 
         .terminal-header {
-            background: #0f172a;
-            padding: 10px 15px;
+            background: linear-gradient(to bottom, #3c3f41, #2e3133);
+            padding: 8px 12px;
             display: flex;
+            align-items: center;
             gap: 8px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #1c1f20;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            color: #d3d7cf;
+            font-size: 0.85rem;
+            font-weight: 500;
+            font-family: system-ui, -apple-system, sans-serif;
+            margin-right: 60px;
+            /* Balance the space taken by dots */
         }
 
         .dot {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        .dot:hover {
+            filter: brightness(1.1);
+            cursor: pointer;
         }
 
         .red {
-            background: #ef4444;
+            background: linear-gradient(to bottom, #f57d7d, #e74c3c);
         }
 
         .yellow {
-            background: #f59e0b;
+            background: linear-gradient(to bottom, #f9ca5f, #f39c12);
         }
 
         .green {
-            background: #10b981;
+            background: linear-gradient(to bottom, #81c784, #4caf50);
         }
 
         .terminal-body {
@@ -275,21 +296,63 @@
         }
 
         .command {
-            color: var(--primary-color);
+            color: #e2e8f0;
             margin-bottom: 10px;
             display: block;
         }
 
         .command::before {
             content: "$ ";
-            color: #64748b;
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        /* Syntax highlighting in terminal */
+        .terminal-comment {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .terminal-cmd {
+            color: #38bdf8;
+        }
+
+        .terminal-url {
+            color: #c084fc;
+        }
+
+        .terminal-flag {
+            color: #f59e0b;
         }
 
         .output {
             color: #94a3b8;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             white-space: pre-wrap;
             display: block;
+            text-align: left !important;
+            font-family: var(--font-mono);
+        }
+
+        .output pre {
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+            color: inherit;
+            white-space: pre;
+        }
+
+        /* JSON syntax highlighting */
+        .json-key {
+            color: #38bdf8;
+        }
+
+        .json-string {
+            color: #86efac;
+        }
+
+        .json-brace {
+            color: #e2e8f0;
         }
 
         /* Installation Tabs */
@@ -351,6 +414,24 @@
             font-family: var(--font-mono);
             color: #e2e8f0;
             margin: 0;
+        }
+
+        /* Syntax highlighting for code blocks */
+        .code-comment {
+            color: #6b7280;
+            font-style: italic;
+        }
+
+        .code-command {
+            color: #38bdf8;
+        }
+
+        .code-string {
+            color: #86efac;
+        }
+
+        .code-flag {
+            color: #c084fc;
         }
 
         .copy-btn {
@@ -484,29 +565,61 @@
                         <div class="dot red"></div>
                         <div class="dot yellow"></div>
                         <div class="dot green"></div>
+                        <div class="terminal-title">geo-checker: ~</div>
                     </div>
                     <div class="terminal-body">
-                        <span class="command">curl localhost:8080/ip/8.8.8.8</span>
-                        <span class="output">{"IP":"8.8.8.8","iso2Code":"US","name":"United States"}</span>
+                        <span class="command"><span class="terminal-comment"></span># Country Detection</span></span>
+                        <span class="command"><span class="terminal-cmd">curl</span> <span
+                                class="terminal-url">localhost:8080/ip/8.8.8.8</span></span>
+                        <span class="output">
+                            <pre><span class="json-brace">{</span>
+<span class="json-key">"IP"</span>: <span class="json-string">"8.8.8.8"</span>,
+<span class="json-key">"iso2Code"</span>: <span class="json-string">"US"</span>,
+<span class="json-key">"name"</span>: <span class="json-string">"United States"</span>
+<span class="json-brace">}</span></pre>
+                        </span>
 
-                        <span class="command"># City Detection</span>
-                        <span class="command">curl localhost:8080/ip/city/8.8.8.8</span>
-                        <span class="output">{"ip":"8.8.8.8","country_iso_code":"US","country_name":"United
-                            States","city_name":"Mountain View","continent_name":"North
-                            America","subdivision_iso_code":"CA","subdivision_name":"California"}</span>
+                        <span class="command"><span class="terminal-comment"># City Detection</span></span>
+                        <span class="command"><span class="terminal-cmd">curl</span> <span
+                                class="terminal-url">localhost:8080/ip/city/8.8.8.8</span></span>
+                        <span class="output">
+                            <pre><span class="json-brace">{</span>
+<span class="json-key">"ip"</span>: <span class="json-string">"8.8.8.8"</span>,
+<span class="json-key">"country_iso_code"</span>: <span class="json-string">"US"</span>,
+<span class="json-key">"country_name"</span>: <span class="json-string">"United States"</span>,
+<span class="json-key">"city_name"</span>: <span class="json-string">"Mountain View"</span>,
+<span class="json-key">"continent_name"</span>: <span class="json-string">"North America"</span>,
+<span class="json-key">"subdivision_iso_code"</span>: <span class="json-string">"CA"</span>,
+<span class="json-key">"subdivision_name"</span>: <span class="json-string">"California"</span>
+<span class="json-brace">}</span></pre>
+                        </span>
 
-                        <span class="command"># Custom Headers</span>
-                        <span class="command">curl localhost:8080 -H "X-Header-Real-Ip: 1.1.1.1"</span>
-                        <span class="output">{"IP":"1.1.1.1","iso2Code":"AU","name":"Australia"}</span>
+                        <span class="command"><span class="terminal-comment"># IPv6 Support</span></span>
+                        <span class="command"><span class="terminal-cmd">curl</span> <span
+                                class="terminal-url">localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de</span></span>
+                        <span class="output">
+                            <pre><span class="json-brace">{</span>
+<span class="json-key">"ip"</span>: <span class="json-string">"2a03:2880:f189:80:face:b00c:0:25de"</span>,
+<span class="json-key">"country_iso_code"</span>: <span class="json-string">"GB"</span>,
+<span class="json-key">"country_name"</span>: <span class="json-string">"United Kingdom"</span>,
+<span class="json-key">"city_name"</span>: <span class="json-string">"London"</span>,
+<span class="json-key">"continent_name"</span>: <span class="json-string">"Europe"</span>
+<span class="json-brace">}</span></pre>
+                        </span>
 
-                        <span class="command">curl localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de</span>
-                        <span class="output">{
-                            "ip": "2a03:2880:f189:80:face:b00c:0:25de",
-                            "country_iso_code": "GB",
-                            "country_name": "United Kingdom",
-                            "city_name": "London",
-                            "continent_name": "Europe"
-                            }</span>
+                        <span class="command"><span class="terminal-comment"># Possible to pass IP address as a custom
+                                header or cloudflare header</span></span>
+                        <span class="command"><span class="terminal-cmd">curl</span> <span
+                                class="terminal-url">localhost:8080/myip</span> <span class="terminal-flag">-H</span>
+                            <span class="json-string">"X-Real-Ip: 8.8.8.8"</span></span>
+                        <span class="output">
+                            <pre><span class="json-brace">{</span>
+<span class="json-key">"IP"</span>: <span class="json-string">"8.8.8.8"</span>,
+<span class="json-key">"iso2Code"</span>: <span class="json-string">"US"</span>,
+<span class="json-key">"name"</span>: <span class="json-string">"United States"</span>
+<span class="json-brace">}</span></pre>
+                        </span>
+
                     </div>
                 </div>
             </div>
@@ -523,14 +636,12 @@
                 <div id="docker" class="tab-content active">
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode('docker-code')">Copy</button>
-                        <pre id="docker-code">
-# Run with Docker
-docker run -d \
-  -v /tmp/geoip/:/usr/share/geoip/ \
-  -e GEOIP_ACCOUNTID="YourAccountID" \
-  -e GEOIP_LICENSEKEY="YourLicenseKey" \
-  -e GEOIP_EDITIONID="GeoLite2-Country" \
-  -p 8080:80 \
+                        <pre id="docker-code"><span class="code-comment"># Run with Docker</span>
+<span class="code-command">docker run</span> <span class="code-flag">-d</span> \
+  <span class="code-flag">-e</span> GEOIP_ACCOUNTID=<span class="code-string">"YourAccountID"</span> \
+  <span class="code-flag">-e</span> GEOIP_LICENSEKEY=<span class="code-string">"YourLicenseKey"</span> \
+  <span class="code-flag">-e</span> GEOIP_EDITIONID=<span class="code-string">"GeoLite2-Country"</span> \
+  <span class="code-flag">-p</span> 8080:80 \
   ymuski/geo-checker:latest</pre>
                     </div>
                 </div>
@@ -538,15 +649,14 @@ docker run -d \
                 <div id="helm" class="tab-content">
                     <div class="code-block">
                         <button class="copy-btn" onclick="copyCode('helm-code')">Copy</button>
-                        <pre id="helm-code">
-# Add Helm Repo
-helm repo add geo-checker https://yurymuski.github.io/geo-checker/helm/
-helm repo update
+                        <pre id="helm-code"><span class="code-comment"># Add Helm Repo</span>
+<span class="code-command">helm repo add</span> geo-checker https://yurymuski.github.io/geo-checker/helm/
+<span class="code-command">helm repo update</span>
 
-# Install Chart
-helm upgrade --install my-geo-checker geo-checker/geo-checker \
-  --set maxmind.geoipAccountid="YourAccountID" \
-  --set maxmind.geoipLicensekey="YourLicenseKey"</pre>
+<span class="code-comment"># Install Chart</span>
+<span class="code-command">helm upgrade</span> <span class="code-flag">--install</span> my-geo-checker geo-checker/geo-checker \
+  <span class="code-flag">--set</span> maxmind.geoipAccountid=<span class="code-string">"YourAccountID"</span> \
+  <span class="code-flag">--set</span> maxmind.geoipLicensekey=<span class="code-string">"YourLicenseKey"</span></pre>
                     </div>
                 </div>
             </div>
@@ -560,7 +670,7 @@ helm upgrade --install my-geo-checker geo-checker/geo-checker \
                 <a href="https://hub.docker.com/r/ymuski/geo-checker" target="_blank">Docker Hub</a>
                 <a href="https://artifacthub.io/packages/helm/geo-checker/geo-checker" target="_blank">Artifact Hub</a>
             </div>
-            <p>&copy; 2023 Yury Muski. Open Source under MIT License.</p>
+            <p>&copy; 2025 Yury Muski. Open Source under MIT License.</p>
         </div>
     </footer>
 
