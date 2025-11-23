@@ -9,6 +9,7 @@
         content="Simple and high-performance GeoIP lookup server ready for Docker and Kubernetes (k8s). Built on OpenResty and MaxMind. Free and open-source.">
     <meta name="keywords" content="simple, geoip, ip geolocation, lookup, server, docker, kubernetes, k8s, helm, openresty, nginx, maxmind, api">
     <meta name="author" content="Yury Muski">
+    <meta name="theme-color" content="#0f172a">
     <link rel="icon" type="image/png" href="favicon.png">
 
     <!-- Open Graph / Facebook -->
@@ -62,6 +63,7 @@
         }
 
         a:hover {
+            /* Fallback for non-hover devices or if query fails */
             color: var(--accent-color);
         }
 
@@ -170,8 +172,6 @@
 
         .btn-primary:hover {
             background: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
             color: var(--bg-color);
         }
 
@@ -206,7 +206,7 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
+            /* transform: translateY(-5px); */
             border-color: var(--primary-color);
         }
 
@@ -475,14 +475,113 @@
         }
 
         /* Responsive */
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 102;
+        }
+
+        .mobile-menu-btn span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-color);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
 
+            .mobile-menu-btn {
+                display: block;
+            }
+
             .nav-links {
-                display: none;
-                /* Simple hide for mobile for now */
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 75%;
+                background-color: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(15px);
+                flex-direction: column;
+                justify-content: center;
+                transition: 0.3s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5);
+                z-index: 101;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero {
+                padding: 60px 0 40px;
+            }
+
+            .features,
+            .installation,
+            .demo-section {
+                padding: 40px 0;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-links a {
+                margin: 0;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+            }
+        }
+
+        /* Hover support */
+        @media (hover: hover) {
+            a:hover {
+                color: var(--accent-color);
+            }
+
+            .btn-primary:hover {
+                background: var(--accent-color);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+                color: var(--bg-color);
+            }
+
+            .btn-secondary:hover {
+                border-color: var(--primary-color);
+                color: var(--primary-color);
+            }
+
+            .feature-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--primary-color);
+            }
+
+            .github-star:hover {
+                background: #2f363d;
+                color: white;
+            }
+
+            .copy-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .footer-links a:hover {
+                color: var(--primary-color);
+                background: rgba(255, 255, 255, 0.1);
             }
         }
     </style>
@@ -494,10 +593,15 @@
         <div class="container">
             <nav>
                 <div class="logo">geo-checker</div>
-                <div class="nav-links">
-                    <a href="#features">Features</a>
-                    <a href="#demo">Demo</a>
-                    <a href="#install">Install</a>
+                <button class="mobile-menu-btn" aria-label="Toggle menu" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <div class="nav-links" id="nav-links">
+                    <a href="#features" onclick="toggleMenu()">Features</a>
+                    <a href="#demo" onclick="toggleMenu()">Demo</a>
+                    <a href="#install" onclick="toggleMenu()">Install</a>
                     <a href="https://github.com/yurymuski/geo-checker" target="_blank" class="github-star">
                         <svg height="16" viewBox="0 0 16 16" version="1.1" width="16" aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -666,6 +770,11 @@
     </footer>
 
     <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav-links');
+            nav.classList.toggle('active');
+        }
+
         function openTab(tabName) {
             // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
