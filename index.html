@@ -568,22 +568,19 @@
                         <div class="terminal-title">geo-checker: ~</div>
                     </div>
                     <div class="terminal-body">
-                        <span class="command"><span class="terminal-comment"></span># Country Detection</span></span>
+                        <span class="output"><span class="terminal-comment"># Country Detection</span></span>
                         <span class="command"><span class="terminal-cmd">curl</span> <span
                                 class="terminal-url">localhost:8080/ip/8.8.8.8</span></span>
-                        <span class="output">
-                            <pre><span class="json-brace">{</span>
+                        <span class="output"><pre><span class="json-brace">{</span>
 <span class="json-key">"IP"</span>: <span class="json-string">"8.8.8.8"</span>,
 <span class="json-key">"iso2Code"</span>: <span class="json-string">"US"</span>,
 <span class="json-key">"name"</span>: <span class="json-string">"United States"</span>
-<span class="json-brace">}</span></pre>
-                        </span>
+<span class="json-brace">}</span></pre></span>
 
-                        <span class="command"><span class="terminal-comment"># City Detection</span></span>
+                        <span class="output"><span class="terminal-comment"># City Detection</span></span>
                         <span class="command"><span class="terminal-cmd">curl</span> <span
                                 class="terminal-url">localhost:8080/ip/city/8.8.8.8</span></span>
-                        <span class="output">
-                            <pre><span class="json-brace">{</span>
+                        <span class="output"><pre><span class="json-brace">{</span>
 <span class="json-key">"ip"</span>: <span class="json-string">"8.8.8.8"</span>,
 <span class="json-key">"country_iso_code"</span>: <span class="json-string">"US"</span>,
 <span class="json-key">"country_name"</span>: <span class="json-string">"United States"</span>,
@@ -591,34 +588,28 @@
 <span class="json-key">"continent_name"</span>: <span class="json-string">"North America"</span>,
 <span class="json-key">"subdivision_iso_code"</span>: <span class="json-string">"CA"</span>,
 <span class="json-key">"subdivision_name"</span>: <span class="json-string">"California"</span>
-<span class="json-brace">}</span></pre>
-                        </span>
+<span class="json-brace">}</span></pre></span>
 
-                        <span class="command"><span class="terminal-comment"># IPv6 Support</span></span>
+                        <span class="output"><span class="terminal-comment"># IPv6 Support</span></span>
                         <span class="command"><span class="terminal-cmd">curl</span> <span
                                 class="terminal-url">localhost:8080/ip/city/2a03:2880:f189:80:face:b00c:0:25de</span></span>
-                        <span class="output">
-                            <pre><span class="json-brace">{</span>
+                        <span class="output"><pre><span class="json-brace">{</span>
 <span class="json-key">"ip"</span>: <span class="json-string">"2a03:2880:f189:80:face:b00c:0:25de"</span>,
 <span class="json-key">"country_iso_code"</span>: <span class="json-string">"GB"</span>,
 <span class="json-key">"country_name"</span>: <span class="json-string">"United Kingdom"</span>,
 <span class="json-key">"city_name"</span>: <span class="json-string">"London"</span>,
 <span class="json-key">"continent_name"</span>: <span class="json-string">"Europe"</span>
-<span class="json-brace">}</span></pre>
-                        </span>
+<span class="json-brace">}</span></pre></span>
 
-                        <span class="command"><span class="terminal-comment"># Possible to pass IP address as a custom
-                                header or cloudflare header</span></span>
+                        <span class="output"><span class="terminal-comment"># Possible to pass IP address as a custom header or cloudflare header</span></span>
                         <span class="command"><span class="terminal-cmd">curl</span> <span
                                 class="terminal-url">localhost:8080/myip</span> <span class="terminal-flag">-H</span>
                             <span class="json-string">"X-Real-Ip: 8.8.8.8"</span></span>
-                        <span class="output">
-                            <pre><span class="json-brace">{</span>
+                        <span class="output"><pre><span class="json-brace">{</span>
 <span class="json-key">"IP"</span>: <span class="json-string">"8.8.8.8"</span>,
 <span class="json-key">"iso2Code"</span>: <span class="json-string">"US"</span>,
 <span class="json-key">"name"</span>: <span class="json-string">"United States"</span>
-<span class="json-brace">}</span></pre>
-                        </span>
+<span class="json-brace">}</span></pre></span>
 
                     </div>
                 </div>
