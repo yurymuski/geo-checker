@@ -1,9 +1,9 @@
-# Geo Checker - IP Geolocation Lookup API, Docker & Kubernetes
+# Geo-Checker | Simple GeoIP Lookup Server - Docker & Kubernetes (k8s)
 
 [![](https://img.shields.io/docker/pulls/ymuski/geo-checker?style=flat-square)](https://hub.docker.com/r/ymuski/geo-checker)
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/geo-checker)](https://artifacthub.io/packages/search?repo=geo-checker)
 
-Geo-checker is a high-performance IP address resolver that provides country name, ISO code, and other geolocation data. Built on **OpenResty (Nginx)** and **MaxMind GeoIP** databases, it features a built-in cron job for automatic `geoipupdate` to ensure your data is always current.
+**Geo-checker** is a **simple** and high-performance **GeoIP lookup server** ready for **Docker** and **Kubernetes (K8s)**. Built on **OpenResty (Nginx)** and **MaxMind GeoIP** databases, it provides country name, ISO code, and other geolocation data with a built-in cron job for automatic `geoipupdate`.
 
 ## Features
 
