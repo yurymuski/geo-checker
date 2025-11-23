@@ -2,11 +2,28 @@ apiVersion: v1
 entries:
   geo-checker:
   - apiVersion: v2
-    appVersion: 4.0.0
-    created: "2025-10-29T20:48:40.182979855+04:00"
+    appVersion: 5.0.0
+    created: "2025-11-24T00:12:09.053987026+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
-    digest: 23737005b1b3af46601e09663f24ea0443940bee1704846778e0bfaa8f71a177
+    digest: 60503717145914baa3aa14ed3cb0d9f0149a3f9b3b9bdc3ef35d52aa3391be43
+    home: https://github.com/yurymuski/geo-checker
+    maintainers:
+    - email: muski.yury@gmail.com
+      name: yurymuski
+    name: geo-checker
+    sources:
+    - https://github.com/yurymuski/geo-checker/tree/main/helm
+    type: application
+    urls:
+    - https://yurymuski.github.io/geo-checker/helm/packages/geo-checker-5.0.0.tgz
+    version: 5.0.0
+  - apiVersion: v2
+    appVersion: 4.0.0
+    created: "2025-11-24T00:12:09.053260097+04:00"
+    description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
+      on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
+    digest: e14f0ead91dafffae1e262f416c4d4acd4c720aa7fa059ec5a3ea0fdf3ae9b24
     home: https://github.com/yurymuski/geo-checker
     maintainers:
     - email: muski.yury@gmail.com
@@ -20,7 +37,7 @@ entries:
     version: 4.0.0
   - apiVersion: v2
     appVersion: 3.1.1
-    created: "2025-10-29T20:48:40.180647122+04:00"
+    created: "2025-11-24T00:12:09.052587696+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 63bab1ba343bc0304065e4743f3ef8c3f6a878008b75b6ed630dd2ce67df3781
@@ -37,7 +54,7 @@ entries:
     version: 3.1.1
   - apiVersion: v2
     appVersion: 3.1.0
-    created: "2025-10-29T20:48:40.179912591+04:00"
+    created: "2025-11-24T00:12:09.051944258+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 99cc890173f39ece212953f645bdc999bcfd13ee64bd9c04f542737941c3aaa7
@@ -54,7 +71,7 @@ entries:
     version: 3.1.0
   - apiVersion: v2
     appVersion: 3.0.1
-    created: "2025-10-29T20:48:40.178994049+04:00"
+    created: "2025-11-24T00:12:09.051242582+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: e853a1d0272a7c38b2764914e690d5c95b8127efc35d5ce20d7a039ab47e831f
@@ -71,7 +88,7 @@ entries:
     version: 3.0.1
   - apiVersion: v2
     appVersion: 3.0.0
-    created: "2025-10-29T20:48:40.178269253+04:00"
+    created: "2025-11-24T00:12:09.050615628+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 9f679597dc25517ad2fa8ccf0006e3b6ae5c1c3ab5f37e1801ba013e5ebe728a
@@ -88,7 +105,7 @@ entries:
     version: 3.0.0
   - apiVersion: v2
     appVersion: 2.1.1
-    created: "2025-10-29T20:48:40.177472271+04:00"
+    created: "2025-11-24T00:12:09.049929422+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 80d9f34bc852443cea3da9369e6a6ea4ae75edcf62c1ed25765bddc7300c2c9d
@@ -105,7 +122,7 @@ entries:
     version: 2.1.1
   - apiVersion: v2
     appVersion: 2.1.0
-    created: "2025-10-29T20:48:40.176742602+04:00"
+    created: "2025-11-24T00:12:09.049199697+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 47a66c413afe09d7d2c186e91b1f116ef80bee2063ec7d7c9f9137c041c5a218
@@ -122,7 +139,7 @@ entries:
     version: 2.1.0
   - apiVersion: v2
     appVersion: 2.0.1
-    created: "2025-10-29T20:48:40.175934936+04:00"
+    created: "2025-11-24T00:12:09.048418418+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: bd3202e700b5093d02a698834fbc30f4399f2d5bda3c60e3fd8d53cbde998d98
@@ -139,7 +156,7 @@ entries:
     version: 2.0.1
   - apiVersion: v2
     appVersion: 2.0.0
-    created: "2025-10-29T20:48:40.174800256+04:00"
+    created: "2025-11-24T00:12:09.047613923+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: f88c3f23843f2881c7feade4f350687d0ad19dff1677ee87afba11c72488a7ff
@@ -156,7 +173,7 @@ entries:
     version: 2.0.0
   - apiVersion: v2
     appVersion: v1-1-0
-    created: "2025-10-29T20:48:40.173865612+04:00"
+    created: "2025-11-24T00:12:09.045989713+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.Based
       on openresty (nginx) and maxmind geo DB (build-in cron for geoipupdate).
     digest: 9517f7d39bc69984d2e9ba2c263cd9ab2700f90110adab11225db23e5c71dfc2
@@ -173,7 +190,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: v1-1-0
-    created: "2025-10-29T20:48:40.172968525+04:00"
+    created: "2025-11-24T00:12:09.045061617+04:00"
     description: Geo-checker is the IP address resolver to the country_name and iso_code.
       Based on openresty (nginx) and maxmind geo DB.
     digest: cd31db4acf49a69cc9778f2dcff5b7a3a4fec3686974df15d036c6e74e1b2513
@@ -182,4 +199,4 @@ entries:
     urls:
     - https://yurymuski.github.io/geo-checker/helm/packages/geo-checker-0.1.0.tgz
     version: 0.1.0
-generated: "2025-10-29T20:48:40.171572952+04:00"
+generated: "2025-11-24T00:12:09.044190386+04:00"
