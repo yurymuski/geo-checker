@@ -5,6 +5,13 @@
 
 **Geo-checker** is a **simple** and high-performance **GeoIP lookup server** ready for **Docker** and **Kubernetes (K8s)**. Built on **OpenResty (Nginx)** and **MaxMind GeoIP** databases, it provides country name, ISO code, and other geolocation data with a built-in cron job for automatic `geoipupdate`.
 
+👉 If you found Geo-Checker useful, please consider giving it a star. ⭐
+
+## Live Demo
+- [ip/8.8.8.8](https://geo.yurets.pro/ip/8.8.8.8) 
+- [ip/2a03:2880:f189:80:face:b00c:0:25de](https://geo.yurets.pro/ip/2a03:2880:f189:80:face:b00c:0:25de)
+
+
 ## Features
 
 - **High Performance**: Built on Nginx/OpenResty for low latency.
